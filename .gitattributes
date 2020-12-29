@@ -1,0 +1,6 @@
+*.yml	text eol=lf
+.gitattribute   text eol=lf
+.gitignore  text eol=lf
+LICENSE text eol=lf
+openapi-schema.yml text eol=lf
+*.png img

@@ -1,0 +1,119 @@
+- model: user.hechuanguser
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$216000$47C9XkhCb8oL$CcRftfr8BhJmhGPdBMmT7d4HFMftDzswv/v0GHIENBQ=
+    last_login: null
+    is_superuser: true
+    username: admin
+    first_name: ''
+    last_name: ''
+    email: rand1925@tongji.edu.cn
+    is_staff: true
+    is_active: true
+    date_joined: 2020-12-28 09:56:31.792657+00:00
+    address: ''
+    groups: []
+    user_permissions: []
+- model: user.hechuanguser
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$216000$xZQMahQp2Zrl$ddWi4/n6A69oBYhw0VSRZBR02RW9PccSpPEx1bBVzfo=
+    last_login: null
+    is_superuser: false
+    username: rand1925
+    first_name: ''
+    last_name: ''
+    email: rand1925@tongji.edu.cn
+    is_staff: false
+    is_active: true
+    date_joined: 2020-12-28 09:56:31.920640+00:00
+    address: ''
+    groups: []
+    user_permissions: []
+- model: book.book
+  pk: '7111548973'
+  fields:
+    title: 软件工程
+    description: 实践者的研究方法
+    tag: 教科书 软件工程
+    price: 9900
+    new_total: 0
+    old_total: 10
+    recommended: false
+    cover: ''
+- model: book.book
+  pk: '7115420114'
+  fields:
+    title: Java核心技术
+    description: Core Java
+    tag: Java
+    price: 10900
+    new_total: 10
+    old_total: 10
+    recommended: false
+    cover: ''
+- model: book.book
+  pk: '7302244752'
+  fields:
+    title: Java程序设计
+    description: Java程序设计
+    tag: 教科书 Java
+    price: 3500
+    new_total: 10
+    old_total: 10
+    recommended: true
+    cover: ''
+- model: order.order
+  pk: 1
+  fields:
+    user: 1
+    book: '7302244752'
+    price: 2450
+    time: 2020-12-28T17:26:30.020126+08:00
+    number: 1
+    old: false
+    status: 30
+- model: order.order
+  pk: 2
+  fields:
+    book: '7115420114'
+    user: 2
+    time: 2020-12-28 14:15:35.704262+00:00
+    price: 2450
+    status: 60
+    old: false
+    number: 1
+- model: order.order
+  pk: 3
+  fields:
+    book: '7115420114'
+    user: 2
+    time: 2020-12-28 14:15:37.704262+00:00
+    price: 2450
+    status: 70
+    old: false
+    number: 1
+- model: order.order
+  pk: 4
+  fields:
+    user: 1
+    book: '7115420114'
+    price: 2450
+    time: 2020-12-28T17:26:30.020126+08:00
+    number: 1
+    old: false
+    status: 40
+- model: recycle.recyclerequest
+  pk: 3
+  fields:
+    message: 用户2申请回收
+    price: 1715
+    allowed: null
+    read: false
+    number: 1
+- model: config.siteconfiguration
+  pk: 1
+  fields:
+    publisher_email: 1753764@tongji.edu.cn
+    discount_rate: 0
+    old_rate: 0.3

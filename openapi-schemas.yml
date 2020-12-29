@@ -1,0 +1,2025 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /api_info/:
+    get:
+      operationId: listAPIInfos
+      description: "\u8FD4\u56DE\u6240\u6709\u7EC4\uFF08\u67E5\uFF09"
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/APIInfo'
+          description: ''
+      tags:
+      - api-info
+    post:
+      operationId: createAPIInfo
+      description: "\u521B\u5EFA\u65B0\u7EC4\uFF08\u589E\uFF09"
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/APIInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/APIInfo'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIInfo'
+          description: ''
+      tags:
+      - api-info
+  /api_info/{id}/:
+    get:
+      operationId: retrieveAPIInfo
+      description: "\u8FD4\u56DE\u4E00\u7EC4\uFF08\u67E5\uFF09"
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u63A5\u53E3\u5217\u8868\
+          ."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIInfo'
+          description: ''
+      tags:
+      - api-info
+    put:
+      operationId: updateAPIInfo
+      description: "\u66F4\u65B0\u4E00\u7EC4\uFF08\u6539\uFF1A\u5168\u90E8\u66F4\u6539\
+        \uFF09"
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u63A5\u53E3\u5217\u8868\
+          ."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/APIInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/APIInfo'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIInfo'
+          description: ''
+      tags:
+      - api-info
+    patch:
+      operationId: partialUpdateAPIInfo
+      description: "\u66F4\u65B0\u73B0\u6709\u7EC4\u4E2D\u7684\u4E00\u4E2A\u6216\u591A\
+        \u4E2A\u5B57\u6BB5\uFF08\u6539\uFF1A\u90E8\u5206\u66F4\u6539\uFF09"
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u63A5\u53E3\u5217\u8868\
+          ."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/APIInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/APIInfo'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIInfo'
+          description: ''
+      tags:
+      - api-info
+    delete:
+      operationId: destroyAPIInfo
+      description: "\u5220\u9664\u73B0\u6709\u7684\u4E00\u7EC4\uFF08\u5220\uFF09"
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u63A5\u53E3\u5217\u8868\
+          ."
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api-info
+  /api/v1/book/:
+    get:
+      operationId: listBooks
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+          description: ''
+      tags:
+      - book
+      - customer
+    post:
+      operationId: createBook
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+      tags:
+      - book
+      - customer
+  /api/v1/book/{isbn}/:
+    get:
+      operationId: retrieveBook
+      description: ''
+      parameters:
+      - name: isbn
+        in: path
+        required: true
+        description: A unique value identifying this book.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+      tags:
+      - book
+      - customer
+    put:
+      operationId: updateBook
+      description: ''
+      parameters:
+      - name: isbn
+        in: path
+        required: true
+        description: A unique value identifying this book.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+      tags:
+      - book
+      - customer
+    patch:
+      operationId: partialUpdateBook
+      description: ''
+      parameters:
+      - name: isbn
+        in: path
+        required: true
+        description: A unique value identifying this book.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+      tags:
+      - book
+      - customer
+    delete:
+      operationId: destroyBook
+      description: ''
+      parameters:
+      - name: isbn
+        in: path
+        required: true
+        description: A unique value identifying this book.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - book
+      - customer
+  /api/v1/book/tag/{tag}/:
+    get:
+      operationId: listBookTagFilters
+      description: "\u6309\u7167tag\u627E"
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookTagFilter'
+          description: ''
+      tags:
+      - book
+      - search
+  /api/v1/book/title/{title}/:
+    get:
+      operationId: listBookTitleFilters
+      description: "\u6309\u7167\u4E66\u540D\u627E"
+      parameters:
+      - name: title
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookTitleFilter'
+          description: ''
+      tags:
+      - book
+      - search
+  /api/v1/order/:
+    get:
+      operationId: listOrders
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+    post:
+      operationId: createOrder
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+  /api/v1/order/{id}/:
+    get:
+      operationId: retrieveOrder
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+    put:
+      operationId: updateOrder
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+    patch:
+      operationId: partialUpdateOrder
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+    delete:
+      operationId: destroyOrder
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+  /api/v1/order/customer/:
+    get:
+      operationId: listCustomerOrders
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerOrder'
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+  /api/v1/auth/logout/:
+    get:
+      operationId: listLogouts
+      description: 'Calls Django logout method and delete the Token object
+
+        assigned to the current User object.
+
+
+        Accepts/Returns nothing.'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createLogout
+      description: 'Calls Django logout method and delete the Token object
+
+        assigned to the current User object.
+
+
+        Accepts/Returns nothing.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/v1/auth/user_profile/:
+    get:
+      operationId: retrieveUserProfile
+      description: 'Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields.'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateUserProfile
+      description: 'Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateUserProfile
+      description: 'Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+          description: ''
+      tags:
+      - api
+  /api/v1/recycle/:
+    get:
+      operationId: listRecycleRequests
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecycleRequest'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createRecycleRequest
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecycleRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecycleRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecycleRequest'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecycleRequest'
+          description: ''
+      tags:
+      - api
+  /api/v1/recycle/{id}/:
+    get:
+      operationId: retrieveRecycleRequest
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecycleRequest'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateRecycleRequest
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecycleRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecycleRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecycleRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecycleRequest'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateRecycleRequest
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecycleRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecycleRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecycleRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecycleRequest'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyRecycleRequest
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/:
+    get:
+      operationId: listNotifications
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GlobalNotification'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createNotification
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalNotification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalNotification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GlobalNotification'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalNotification'
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/{id}/:
+    get:
+      operationId: retrieveNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this notification.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalNotification'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this notification.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalNotification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalNotification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GlobalNotification'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalNotification'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this notification.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalNotification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GlobalNotification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GlobalNotification'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalNotification'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this notification.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/:
+    get:
+      operationId: listUserNotifications
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createUserNotification
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Notification'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/count/:
+    get:
+      operationId: countUserNotification
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/{id}/:
+    get:
+      operationId: retrieveUserNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateUserNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Notification'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateUserNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Notification'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyUserNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/unread/:
+    get:
+      operationId: listUnreadNotifications
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UnreadNotification'
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/unread/count/:
+    get:
+      operationId: countUnreadNotification
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnreadNotification'
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/read/:
+    get:
+      operationId: listReadNotifications
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReadNotification'
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/read/count/:
+    get:
+      operationId: countReadNotification
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadNotification'
+          description: ''
+      tags:
+      - api
+  /api/v1/book/{isbn}/purchase/:
+    post:
+      operationId: purchaseBook
+      description: ''
+      parameters:
+      - name: isbn
+        in: path
+        required: true
+        description: A unique value identifying this book.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+      tags:
+      - book
+      - customer
+  /api/v1/book/{isbn}/recommend/:
+    post:
+      operationId: recommendBook
+      description: ''
+      parameters:
+      - name: isbn
+        in: path
+        required: true
+        description: A unique value identifying this book.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+      tags:
+      - book
+      - customer
+  /api/v1/order/{id}/cancel/:
+    post:
+      operationId: cancelOrder
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+  /api/v1/order/{id}/pay/:
+    post:
+      operationId: payOrder
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+  /api/v1/order/{id}/receive/:
+    post:
+      operationId: reycleOrder
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags: !!python/tuple
+      - order
+      - customer
+  /api/v1/auth/password/reset/:
+    post:
+      operationId: createPasswordReset
+      description: 'Calls Django Auth PasswordResetForm save method.
+
+
+        Accepts the following POST parameters: email
+
+        Returns the success/fail message.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordReset'
+          description: ''
+      tags:
+      - api
+  /api/v1/auth/password/reset/confirm/:
+    post:
+      operationId: createPasswordResetConfirm
+      description: "Password reset e-mail link is confirmed, therefore\nthis resets\
+        \ the userProfile's password.\n\nAccepts the following POST parameters: token,\
+        \ uid,\n    new_password1, new_password2\nReturns the success/fail message."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordResetConfirm'
+          description: ''
+      tags:
+      - api
+  /api/v1/auth/login/:
+    post:
+      operationId: createLogin
+      description: 'Check the credentials and return the REST Token
+
+        if the credentials are valid and authenticated.
+
+        Calls Django Auth login method to register User ID
+
+        in Django session framework
+
+
+        Accept the following POST parameters: username, password
+
+        Return the REST Framework Token Object''s key.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+      tags:
+      - api
+  /api/v1/auth/password/change/:
+    post:
+      operationId: createPasswordChange
+      description: 'Calls Django Auth SetPasswordForm save method.
+
+
+        Accepts the following POST parameters: new_password1, new_password2
+
+        Returns the success/fail message.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordChange'
+          description: ''
+      tags:
+      - api
+  /api/v1/auth/register/:
+    post:
+      operationId: createRegister
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+      tags:
+      - api
+  /api/v1/auth/register/verify-email/:
+    post:
+      operationId: createVerifyEmail
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyEmail'
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/unread/mark-all/:
+    patch:
+      operationId: markAllAsReadUnreadNotification
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnreadNotification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UnreadNotification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UnreadNotification'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnreadNotification'
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/unread/{id}/mark/:
+    patch:
+      operationId: markAsReadUnreadNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnreadNotification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UnreadNotification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UnreadNotification'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnreadNotification'
+          description: ''
+      tags:
+      - api
+  /api/v1/notification/user/read/{id}/mark/:
+    patch:
+      operationId: markAsUnreadReadNotification
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadNotification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReadNotification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReadNotification'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadNotification'
+          description: ''
+      tags:
+      - api
+components:
+  schemas:
+    APIInfo:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        api_name:
+          type: string
+          maxLength: 32
+        api_descriptions:
+          type: string
+          maxLength: 255
+        create_time:
+          type: string
+          format: date-time
+          readOnly: true
+        update_time:
+          type: string
+          format: date-time
+          readOnly: true
+    Book:
+      type: object
+      properties:
+        isbn:
+          type: string
+          maxLength: 10
+        title:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+        price:
+          type: integer
+        new_total:
+          type: integer
+        old_total:
+          type: integer
+        recommended:
+          type: boolean
+        cover:
+          type: string
+        tags:
+          type: array
+          items:
+            type: integer
+      required:
+      - isbn
+      - title
+    BookTagFilter:
+      type: object
+      properties:
+        isbn:
+          type: string
+          maxLength: 10
+        title:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+        price:
+          type: integer
+        new_total:
+          type: integer
+        old_total:
+          type: integer
+        recommended:
+          type: boolean
+        cover:
+          type: string
+        tags:
+          type: array
+          items:
+            type: integer
+      required:
+      - isbn
+      - title
+    BookTitleFilter:
+      type: object
+      properties:
+        isbn:
+          type: string
+          maxLength: 10
+        title:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+        price:
+          type: integer
+        new_total:
+          type: integer
+        old_total:
+          type: integer
+        recommended:
+          type: boolean
+        cover:
+          type: string
+        tags:
+          type: array
+          items:
+            type: integer
+      required:
+      - isbn
+      - title
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        time:
+          type: string
+          format: date-time
+          readOnly: true
+        price:
+          type: integer
+        status:
+          enum:
+          - 0
+          - 10
+          - 20
+          - 30
+          - 40
+          - 50
+          - 60
+          - 70
+          - 100
+          type: integer
+        book:
+          type: string
+        user:
+          type: integer
+      required:
+      - price
+      - book
+      - user
+    CustomerOrder:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        time:
+          type: string
+          format: date-time
+          readOnly: true
+        price:
+          type: integer
+        status:
+          enum:
+          - 0
+          - 10
+          - 20
+          - 30
+          - 40
+          - 50
+          - 60
+          - 70
+          - 100
+          type: integer
+        book:
+          type: string
+        user:
+          type: integer
+      required:
+      - price
+      - book
+      - user
+    UserProfile:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: "\u5FC5\u586B\u3002150\u4E2A\u5B57\u7B26\u6216\u8005\u66F4\u5C11\
+            \u3002\u5305\u542B\u5B57\u6BCD\uFF0C\u6570\u5B57\u548C\u4EC5\u6709\u7684\
+            @/./+/-/_\u7B26\u53F7\u3002"
+          pattern: ^[\w.@+-]+\z
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        address:
+          type: string
+          maxLength: 100
+      required:
+      - username
+      - address
+    RecycleRequest:
+      type: object
+      properties:
+        order:
+          type: integer
+        allowed:
+          type: boolean
+        notification:
+          type: integer
+      required:
+      - order
+      - notification
+    GlobalNotification:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        recipient:
+          type: object
+          properties:
+            id:
+              type: integer
+          required:
+          - id
+        actor:
+          type: object
+          properties:
+            id:
+              type: integer
+          required:
+          - id
+        target:
+          type: string
+          readOnly: true
+        verb:
+          type: string
+        level:
+          type: string
+        description:
+          type: string
+        unread:
+          type: boolean
+        public:
+          type: boolean
+        deleted:
+          type: boolean
+        emailed:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - recipient
+      - actor
+      - verb
+      - level
+      - description
+      - unread
+      - public
+      - deleted
+      - emailed
+    Notification:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        recipient:
+          type: object
+          properties:
+            id:
+              type: integer
+          required:
+          - id
+        actor:
+          type: object
+          properties:
+            id:
+              type: integer
+          required:
+          - id
+        target:
+          type: string
+          readOnly: true
+        verb:
+          type: string
+        level:
+          type: string
+        description:
+          type: string
+        unread:
+          type: boolean
+        public:
+          type: boolean
+        deleted:
+          type: boolean
+        emailed:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - recipient
+      - actor
+      - verb
+      - level
+      - description
+      - unread
+      - public
+      - deleted
+      - emailed
+    UnreadNotification:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        recipient:
+          type: object
+          properties:
+            id:
+              type: integer
+          required:
+          - id
+        actor:
+          type: object
+          properties:
+            id:
+              type: integer
+          required:
+          - id
+        target:
+          type: string
+          readOnly: true
+        verb:
+          type: string
+        level:
+          type: string
+        description:
+          type: string
+        unread:
+          type: boolean
+        public:
+          type: boolean
+        deleted:
+          type: boolean
+        emailed:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - recipient
+      - actor
+      - verb
+      - level
+      - description
+      - unread
+      - public
+      - deleted
+      - emailed
+    ReadNotification:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        recipient:
+          type: object
+          properties:
+            id:
+              type: integer
+          required:
+          - id
+        actor:
+          type: object
+          properties:
+            id:
+              type: integer
+          required:
+          - id
+        target:
+          type: string
+          readOnly: true
+        verb:
+          type: string
+        level:
+          type: string
+        description:
+          type: string
+        unread:
+          type: boolean
+        public:
+          type: boolean
+        deleted:
+          type: boolean
+        emailed:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - recipient
+      - actor
+      - verb
+      - level
+      - description
+      - unread
+      - public
+      - deleted
+      - emailed
+    PasswordReset:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    PasswordResetConfirm:
+      type: object
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - new_password1
+      - new_password2
+      - uid
+      - token
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+      - password
+    PasswordChange:
+      type: object
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+      required:
+      - new_password1
+      - new_password2
+    Register:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 150
+          minLength: 1
+        email:
+          type: string
+          format: email
+        password1:
+          type: string
+          writeOnly: true
+        password2:
+          type: string
+          writeOnly: true
+      required:
+      - username
+      - password1
+      - password2
+    VerifyEmail:
+      type: object
+      properties:
+        key:
+          type: string
+      required:
+      - key
