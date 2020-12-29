@@ -165,3 +165,4 @@ REST_FRAMEWORK = {
 
 
 AUTH_USER_MODEL = 'user.HechuangUser'
+USER_DETAILS_SERIALIZER = 'user.PublicUserSerializer'

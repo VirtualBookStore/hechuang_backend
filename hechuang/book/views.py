@@ -1,8 +1,9 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
-from rest_framework.decorators import action, permission_classes
+from rest_framework.decorators import action
+from rest_framework import decorators
 from rest_framework.exceptions import APIException
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.schemas.openapi import AutoSchema
@@ -14,6 +15,7 @@ from order.models import Order
 from order.serializers import OrderSerializer
 from notifications.signals import notify
 
+from user.permissons import IsAdminUserOrReadOnly, IsCustomer
 from .models import Book
 from .serializers import DetailedBookSerializer
 
@@ -21,6 +23,10 @@ User = get_user_model()
 
 
 class BookViewSet(ModelViewSet):
+    """
+        其中推荐倒序
+    """
+    permission_classes = (IsAdminUserOrReadOnly, )
     serializer_class = DetailedBookSerializer
     filter_backends = [SearchFilter]
     filterset_fields = ('recommended', )
@@ -30,15 +36,12 @@ class BookViewSet(ModelViewSet):
         tags=['book', 'customer']
     )
 
-    """
-    推荐书本
-    """
 
     def get_queryset(self):
         return Book.objects.all().order_by('-recommended')
 
     @action(methods=('patch',), detail=True, url_path='recommend', description="推荐书本，recommended参数：布尔值")
-    @permission_classes((IsAdminUser,))
+    @decorators.permission_classes((IsAdminUser,))
     def recommend(self, request: Request, pk=None) -> Response:
         recommended: bool = getattr(request.data, 'recommend', True)
         book: Book = self.get_object()
@@ -49,7 +52,7 @@ class BookViewSet(ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(methods=('post',), detail=True, url_path='purchase', description='买书')
-    @permission_classes((IsAuthenticated,))
+    @decorators.permission_classes((IsCustomer,))
     def purchase(self, request: Request, pk=None) -> Response:
         user: User = request.user
         purchase_total = int(request.data.get('total', 1))

@@ -13,4 +13,3 @@ class Book(models.Model):
     old_total = models.IntegerField(default=0)
     recommended = models.BooleanField(default=False)
     cover = models.ImageField(upload_to='', null=True)
-

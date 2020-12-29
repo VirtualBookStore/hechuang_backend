@@ -7,6 +7,7 @@ router.register('', NotificationViewSet, basename='Notification')
 
 urlpatterns = router.urls
 urlpatterns += [
-    path('all', GlobalNotificationView, )
+    path('all/', GlobalNotificationView.as_view(), )
 ]
 app_name = 'notifications_rest'
+

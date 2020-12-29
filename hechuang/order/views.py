@@ -1,16 +1,13 @@
 from typing import *
 
-import django_filters
 from django.contrib.auth import get_user_model
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
-from rest_framework.decorators import action, authentication_classes, permission_classes
+from rest_framework.decorators import action, permission_classes
 from rest_framework.exceptions import APIException
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from rest_framework.viewsets import  ReadOnlyModelViewSet
 from rest_framework.schemas.openapi import AutoSchema
 
 from notifications.signals import notify
@@ -21,21 +18,22 @@ from book.models import Book
 from recycle.serializers import RecycleRequestSerializer
 
 from .models import Order
-from .permissons import IsOwner
+from user.permissons import IsOwner
 from .serializers import OrderSerializer
 
 User = get_user_model()
 
 
 class OrderViewSet(ReadOnlyModelViewSet):
-    queryset = Order.objects.all()
+    """
+    订单功能，顾客只能查看自己的订单，管理员可以查看所有订单那
+    """
     serializer_class = OrderSerializer
-    authentication_classes = (SessionAuthentication, BasicAuthentication, TokenAuthentication)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('status',)
     schema = AutoSchema(
         tags=('order', 'customer')
     )
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ['status']
 
     def get_queryset(self):
         queryset = Order.objects.all()
@@ -44,7 +42,8 @@ class OrderViewSet(ReadOnlyModelViewSet):
             queryset = queryset.filter(user=user)
         return queryset
 
-    def _change_status(self, order: Order, new_status: Order.OrderStatus,
+    @staticmethod
+    def _change_status(order: Order, new_status: Order.OrderStatus,
                        satisfied_old_status: Sequence[Order.OrderStatus]) -> Response:
         if order.status not in satisfied_old_status:
             raise APIException(detail='当前订单状态有误')
@@ -64,11 +63,11 @@ class OrderViewSet(ReadOnlyModelViewSet):
                                    (Order.OrderStatus.PAID, Order.OrderStatus.NOT_PAID))
 
     '''
-    
+    退款
     '''
 
-    @action(methods=['PATCH'], detail=True, url_name='refundOrder', url_path='refund', description='退款订单')
-    @permission_classes((IsOwner,))
+    @action(methods=['PATCH'], detail=True, url_name='refundOrder', url_path='refund', description='退款')
+    @permission_classes((IsOwner, ))
     def refund(self, request, *args, **kwargs):
         order: Order = self.get_object()
         return self._change_status(order, Order.OrderStatus.CANCELLED,
@@ -80,7 +79,7 @@ class OrderViewSet(ReadOnlyModelViewSet):
     '''
 
     @action(methods=['PATCH'], detail=True, url_name='payOrder', url_path='pay', description='支付')
-    @permission_classes((IsOwner,))
+    @permission_classes((IsOwner, ))
     def pay(self, request, *args, **kwargs):
         order: Order = self.get_object()
         book = order.book
@@ -89,7 +88,8 @@ class OrderViewSet(ReadOnlyModelViewSet):
         else:
             book.new_total -= order.number
         book.save()
-        return self._change_status(order, Order.OrderStatus.PAID, (Order.OrderStatus.NOT_PAID,))
+        return self._change_status(order, Order.OrderStatus.PAID,
+                                   (Order.OrderStatus.NOT_PAID,))
 
     """
     收货

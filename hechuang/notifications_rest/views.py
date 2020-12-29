@@ -23,14 +23,15 @@ class GlobalNotificationView(ListAPIView):
 
 
 class NotificationViewSet(ReadOnlyModelViewSet):
+    permission_classes = (IsAuthenticated,)
     serializer_class = NotificationSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('unread',)
+
     schema = AutoSchema(
         component_name='Notification',
         operation_id_base='UserNotification'
     )
-    permission_classes = (IsAuthenticated,)
-    filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('unread',)
 
     def get_queryset(self):
         user = self.request.user
@@ -44,18 +45,15 @@ class NotificationViewSet(ReadOnlyModelViewSet):
         }
         return Response(data)
 
-
     @action(methods=['patch'], url_path='mark-all-read', detail=False)
     def mark_all_as_read(self, request, *args, **kwargs):
         self.queryset.update(unread=False)
         return Response(status=status.HTTP_200_OK)
 
-
     @action(methods=['patch'], url_path='mark-all-unread', detail=False)
     def mark_all_as_unread(self, request, *args, **kwargs):
         self.queryset.update(unread=False)
         return Response(status=status.HTTP_200_OK)
-
 
     @action(methods=['patch'], url_path='mark-read', detail=True)
     def mark_as_read(self, request, *args, **kwargs):
@@ -63,7 +61,6 @@ class NotificationViewSet(ReadOnlyModelViewSet):
         notification.unread = False
         notification.save()
         return Response(notification, status=status.HTTP_200_OK)
-
 
     @action(methods=['patch'], url_path='mark-unread', detail=True)
     def mark_as_unread(self, request, *args, **kwargs):
