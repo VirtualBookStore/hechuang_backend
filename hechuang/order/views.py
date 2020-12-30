@@ -29,6 +29,7 @@ class OrderViewSet(ReadOnlyModelViewSet):
     订单功能，顾客只能查看自己的订单，管理员可以查看所有订单那
     """
     serializer_class = OrderSerializer
+    permission_classes = (IsAdminUser | IsOwner, )
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('status',)
     schema = AutoSchema(
@@ -54,9 +55,8 @@ class OrderViewSet(ReadOnlyModelViewSet):
     '''
     取消订单
     '''
-
-    @action(methods=['PATCH'], detail=True, url_name='cancelOrder', url_path='cancel', description='取消订单')
-    @permission_classes((IsOwner,))
+    @action(methods=['PATCH'], detail=True, url_name='cancelOrder', url_path='cancel',
+            permission_classes=(IsOwner, ), description='取消订单')
     def cancel(self, request, *args, **kwargs):
         order: Order = self.get_object()
         return self._change_status(order, Order.OrderStatus.CANCELLED,
@@ -65,21 +65,18 @@ class OrderViewSet(ReadOnlyModelViewSet):
     '''
     退款
     '''
-
-    @action(methods=['PATCH'], detail=True, url_name='refundOrder', url_path='refund', description='退款')
-    @permission_classes((IsOwner, ))
+    @action(methods=['PATCH'], detail=True, url_name='refundOrder', url_path='refund',
+            permission_classes=(IsOwner, ), description='退款')
     def refund(self, request, *args, **kwargs):
         order: Order = self.get_object()
         return self._change_status(order, Order.OrderStatus.CANCELLED,
                                    (Order.OrderStatus.PAID,))
 
-
     '''
     支付
     '''
-
-    @action(methods=['PATCH'], detail=True, url_name='payOrder', url_path='pay', description='支付')
-    @permission_classes((IsOwner, ))
+    @action(methods=['PATCH'], detail=True, url_name='payOrder', url_path='pay',
+            permission_classes=(IsOwner, ), description='支付')
     def pay(self, request, *args, **kwargs):
         order: Order = self.get_object()
         book = order.book
@@ -94,23 +91,20 @@ class OrderViewSet(ReadOnlyModelViewSet):
     """
     收货
     """
-
-    @action(methods=['PATCH'], detail=True, url_name='receiveOrder', url_path='receive', description='确认收货')
-    @permission_classes((IsOwner,))
+    @action(methods=['PATCH'], detail=True, url_name='receiveOrder', url_path='receive',
+            permission_classes=(IsOwner, ), description='确认收货')
     def receive(self, request, *args, **kwargs):
         order: Order = self.get_object()
         return self._change_status(order, Order.OrderStatus.FINISHED,
                                    (Order.OrderStatus.PAID, ))
 
-
-    '''
+    """
     申请回收
     "message" : 额外信息
     "number" : 回收数量
-    '''
+    """
     @action(methods=['POST'], detail=True, url_name='requestRecycle', url_path='recycle',
-            description='申请回收')
-    @permission_classes((IsOwner,))
+            permission_classes=(IsOwner, ), description='申请回收')
     def create_recycle_request(self, request, *args, **kwargs):
         message: str = request.data.get('message', '')
         order: Order = self.get_object()
@@ -136,13 +130,25 @@ class OrderViewSet(ReadOnlyModelViewSet):
         return Response(RecycleRequestSerializer(recycle_request).data, status=status.HTTP_201_CREATED)
 
     '''
+    回收价格
+    '''
+    @action(methods=['GET'], detail=True, url_name='requestPrice', url_path='recycle/price',
+            permission_classes=(IsOwner, ), description='申请回收')
+    def create_recycle_price(self, request, *args, **kwargs):
+        order: Order = self.get_object()
+        number: int = request.data.get('number', order.number)
+        config: SiteConfiguration = SiteConfiguration.get_solo()
+        price = int(order.price / order.number * number * (1 - config.recycle_rate))
+        return Response(price)
+
+
+    '''
     审核回收
     "allowed": 结果, bool
     "price": 重新设定的价格
     '''
-
-    @action(methods=['PATCH'], detail=True, url_name='requestRecycle', url_path='recycle/check')
-    @permission_classes((IsAdminUser,))
+    @action(methods=['PATCH'], detail=True, url_name='requestRecycle', url_path='recycle/check',
+            permission_classes=(IsAdminUser, ), description='审核回收')
     def check_recycle_request(self, request, *args, **kwargs):
         order: Order = self.get_object()
         if order.old:
@@ -171,9 +177,8 @@ class OrderViewSet(ReadOnlyModelViewSet):
     '''
     回收收货
     '''
-
-    @action(methods=['PATCH'], detail=True, url_name='recycle-receive', url_path='recycle/receive')
-    @permission_classes((IsAdminUser,))
+    @action(methods=['PATCH'], detail=True, url_name='recycle-receive', url_path='recycle/receive',
+            permission_classes=(IsAdminUser,), description='回收收货')
     def receive_recycle(self, request, *args, **kwargs):
         order: Order = self.get_object()
         book: Book = order.book

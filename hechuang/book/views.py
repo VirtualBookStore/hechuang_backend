@@ -1,9 +1,8 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework import decorators
 from rest_framework.exceptions import APIException
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.schemas.openapi import AutoSchema
@@ -36,12 +35,10 @@ class BookViewSet(ModelViewSet):
         tags=['book', 'customer']
     )
 
-
     def get_queryset(self):
         return Book.objects.all().order_by('-recommended')
 
     @action(methods=('patch',), detail=True, url_path='recommend', description="推荐书本，recommended参数：布尔值")
-    @decorators.permission_classes((IsAdminUser,))
     def recommend(self, request: Request, pk=None) -> Response:
         recommended: bool = getattr(request.data, 'recommend', True)
         book: Book = self.get_object()
@@ -51,8 +48,16 @@ class BookViewSet(ModelViewSet):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(methods=('post',), detail=True, url_path='purchase', description='买书')
-    @decorators.permission_classes((IsCustomer,))
+    @action(methods=('get',), detail=True, url_path='price', permission_classes=(AllowAny,), description='买书')
+    def price(self, request: Request, pk=None) -> Response:
+        purchase_total = int(request.data.get('total', 1))
+        purchase_old = request.data.get('old', False)
+
+        book: Book = self.get_object()
+        price = self._calc_promotion(book, purchase_old, purchase_total)
+        return Response(price, status=status.HTTP_200_OK)
+
+    @action(methods=('post',), detail=True, url_path='purchase', permission_classes=(IsCustomer,), description='买书')
     def purchase(self, request: Request, pk=None) -> Response:
         user: User = request.user
         purchase_total = int(request.data.get('total', 1))

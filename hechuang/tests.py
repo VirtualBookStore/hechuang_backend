@@ -74,7 +74,7 @@ class AllTest(TestCase):
 
     def test_purchase(self):
         response_purchase = self._make_test(self.customer_client, 'post', '/api/v1/book/7302244752/purchase/', data={
-            'old': True,
+            'old': False,
             'total': 1
         })
         response_order_mine = self._make_test(self.customer_client, 'get', '/api/v1/order/')
@@ -89,6 +89,11 @@ class AllTest(TestCase):
         response_order_recycle_request = self._make_test(self.customer_client, 'post',
                                                          f'/api/v1/order/{order_id}/recycle/',
                                                          data={"message": "申请回收"})
+        response_order_recycle_check = self._make_test(self.admin_client, 'patch',
+                                                         f'/api/v1/order/{order_id}/recycle/check/',
+                                                         data={"allowed": True})
+        response_order_recycle_receive = self._make_test(self.admin_client, 'patch',
+                                                       f'/api/v1/order/{order_id}/recycle/receive/')
 
         response_noti = self._make_test(self.customer_client, 'get', '/api/v1/notification/')
         response_noti = self._make_test(self.admin_client, 'get', '/api/v1/notification/')
