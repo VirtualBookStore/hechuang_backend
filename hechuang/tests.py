@@ -65,6 +65,8 @@ class AllTest(TestCase):
     def test_list_recycle_saus(self):
         response_list_recycle = self._make_test(self.customer_client, 'get', '/api/v1/profile/')
 
+    def test_retreive(self):
+        r = self._make_test(self.customer_client, 'get', '/api/v1/config/')
 
     def test_list_recycle_satus(self):
         response_list_recycle = self._make_test(self.admin_client, 'get', '/api/v1/recycle/?status=100')

@@ -7,6 +7,8 @@ from user.permissons import IsAdminUserOrReadOnly
 from .models import SiteConfiguration
 from .serializers import SiteConfigurationSerializer, PublicSiteConfigurationSerializer
 
+config = SiteConfiguration.get_solo()
+
 
 class SiteConfigurationView(RetrieveUpdateAPIView):
     """
