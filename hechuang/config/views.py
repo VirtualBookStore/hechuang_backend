@@ -23,6 +23,8 @@ class SiteConfigurationView(RetrieveUpdateAPIView):
 
     recycle_rate 回收的折扣率，0-1其中0代表没有折扣，1代表白送
     """
+    object = SiteConfiguration.get_solo()
+    queryset = 
     permission_classes = (IsAdminUserOrReadOnly,)
     serializer_class = SiteConfigurationSerializer
     schema = AutoSchema(
