@@ -7,8 +7,6 @@ from user.permissons import IsAdminUserOrReadOnly
 from .models import SiteConfiguration
 from .serializers import SiteConfigurationSerializer, PublicSiteConfigurationSerializer
 
-config = SiteConfiguration.get_solo()
-
 
 class SiteConfigurationView(RetrieveUpdateAPIView):
     """
@@ -23,8 +21,6 @@ class SiteConfigurationView(RetrieveUpdateAPIView):
 
     recycle_rate 回收的折扣率，0-1其中0代表没有折扣，1代表白送
     """
-    object = SiteConfiguration.get_solo()
-    queryset = SiteConfiguration.get_solo()
     permission_classes = (IsAdminUserOrReadOnly,)
     serializer_class = SiteConfigurationSerializer
     schema = AutoSchema(

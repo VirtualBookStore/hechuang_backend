@@ -111,9 +111,3 @@
     allowed: null
     read: false
     number: 1
-- model: config.siteconfiguration
-  pk: 1
-  fields:
-    publisher_email: 1753764@tongji.edu.cn
-    discount_rate: 0
-    old_rate: 0.3
