@@ -12,14 +12,15 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import sys
 
+from keys import *
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-p = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-FIXTURE_DIRS = (os.path.join(p, 'fixtures'),)
-sys.path.append(os.path.join(p, 'hechuang'))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+FIXTURE_DIRS = (os.path.join(PROJECT_ROOT, 'fixtures'),)
+sys.path.append(os.path.join(PROJECT_ROOT, 'hechuang'))
 
 SITE_ID = 1
 

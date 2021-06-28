@@ -7,35 +7,57 @@
 *注意，所有价格单位精确到人民币分*
 
 
-## how to run
+## how to develop
 
 ### 安装python3
 
-最好是3.9
+必须是python3.9，不然会报错
+
+```bash
+python -V
+```
+
+
+将默认的python版本也设置成3.9
+
+### 使用virtualenv（可选）
+
+```bash
+python -m venv venv
+source ./venv/bin/activate
+```
+
 
 ### 安装依赖
-```
+
+```bash
 pip install -r requirements.txt
 ```
 
 ### 切换到文件夹下
-```
-cd hechuang
+```bash
+cd hechuang # manage.py 所在的目录
 ```
 
-### 启动
-```
+### 开发服务器
+```bash
 python manage.py makemigrations
 python manage.py migrate
-python manage.py runserver
+python manage.py runserver # 调试
 ```
 
 默认会是假设在`http://127.0.0.1:8000/`
-的简单服务器
-api文档在`http://127.0.0.1:8000/openapi/`
+的简单服务器api文档在`http://127.0.0.1:8000/openapi/`
 swagger可视化版本是`http://127.0.0.1:8000/swagger-ui/`
 redoc可视化版本是`http://127.0.0.1:8000/redoc/`
 
+### 使用gunicorn部署
+
+```bash
+cd hechuang # manage.py 所在的目录
+pip install gunicorn
+gunicorn -b=0.0.0.0:6629 -w=4 hechuang.wsgi # 以4个线程启动，在6629端口
+```
 
 
 
@@ -86,73 +108,3 @@ recommended=False
 tags = [3]
 
 ```
-
-
-
-
-
-
-
-
-
-
-### 使用 Docker 环境开发
-
-**注意！**
-- **不要滥用 sudo**
-- 在本地开发分支中执行以下操作
-- 所有对于 `catfood` 下文件的修改都与本地目录同步
-- DB 的数据会持久化存储在 `.persistence` 下，删除请使用
-
-    ```
-    # sudo rm -rf .persistence #
-    ```
-#### 启动 Web 服务器
-
-进入代码根目录，运行
-
-```
-USER_ID=`id -u` GROUP_ID=`id -g` MINIO_ADDRESS=<ip of a specific NIC on your host> docker-compose up
-```
-
-你可以手动查看自己网卡的 IP
-
-```
-ip addr
-```
-
-或者使用以下脚本匹配第一个可用网卡的 IP
-
-```
-alias myip="ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v 127.0.0.1 | head -n 1"
-```
-
-```
-USER_ID=`id -u` GROUP_ID=`id -g` MINIO_ADDRESS=`myip` docker-compose up
-```
-
-不要关闭终端，使用代码编辑器修改代码
-
-在 `http://127.0.0.1:8000` 可以访问 Web API，本地文件保存时会自动刷新服务器
-
-#### 在 Docker 中运行指令
-
-找到 web 的容器
-
-```
-docker ps
-```
-
-打开交互 Shell
-
-```
-docker exec -it <container name or id> /bin/bash 
-```
-
-#### 关闭 Web 服务器
-
-```
-docker-compose down
-```
-
-了解其他配置可以阅读 `Dockerfile.web.dev` 和 `docker-compose.yml`
